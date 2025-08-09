@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sayed Sadiq | Interactive Portfolio</title>
+    <title>Sayed Sadiq | Frontend Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
@@ -16,6 +16,7 @@
             --light: #f8f9fa;
             --glass: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.18);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
@@ -53,6 +54,12 @@
             backdrop-filter: blur(10px);
             background: var(--glass);
             border-bottom: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+        
+        .navbar-scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
         
         .logo {
@@ -95,6 +102,60 @@
         
         .nav-links a:hover::after {
             width: 100%;
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 28px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 28px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(27px);
         }
         
         /* Hero Section */
@@ -195,97 +256,83 @@
             border-radius: 2px;
         }
         
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .about-image {
-            position: relative;
+        /* Skills Section */
+        .skills-section {
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s ease;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
         }
         
-        .about-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            opacity: 0.3;
-            z-index: 1;
-        }
-        
-        .about-image img {
-            width: 100%;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-text p {
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .skill {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-30px);
         }
         
-        .skill:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
+        .skill.visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .skill span {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            transition: width 1.5s ease-in-out;
         }
         
         /* Projects Section */
+        .projects-section {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+        }
+        
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
         
         .project-card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            transform: translateY(50px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            transform: translateY(30px);
             opacity: 0;
+            backdrop-filter: blur(10px);
         }
         
         .project-card.visible {
@@ -294,96 +341,108 @@
         }
         
         .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .project-image {
-            height: 220px;
-            overflow: hidden;
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
         }
         
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover .project-image img {
-            transform: scale(1.1);
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .project-content p {
-            color: #ccc;
-            margin-bottom: 1.5rem;
-        }
-        
-        .project-tags {
+        .badges {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         
-        .tag {
-            background: rgba(108, 99, 255, 0.2);
-            color: var(--primary);
+        .badge {
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge.html { background: #f97316; color: white; }
+        .badge.css { background: #0ea5e9; color: white; }
+        .badge.js { background: #facc15; color: #111; }
+        .badge-light { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: var(--light);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .project-card p {
+            margin-bottom: 1.5rem;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+        
+        .buttons a {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .buttons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
         }
         
         /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+        .contact-section {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
         }
         
         .contact-info {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(108, 99, 255, 0.1);
         }
         
         .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: rgba(108, 99, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             color: var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-item:hover .contact-icon {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-5px);
         }
         
         .contact-text h4 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 0.3rem;
         }
         
@@ -397,78 +456,14 @@
             color: var(--primary);
         }
         
-        .contact-form {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            backdrop-filter: blur(10px);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: var(--light);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(108, 99, 255, 0.1);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
         /* Footer */
         footer {
             text-align: center;
             padding: 3rem 0;
             border-top: 1px solid var(--glass-border);
             margin-top: 5rem;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .social-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: var(--light);
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-5px);
+            font-size: 0.9rem;
+            color: #aaa;
         }
         
         /* Animations */
@@ -506,18 +501,12 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-image {
-                max-width: 80%;
-                margin: 0 auto;
-            }
-            
             .hero h1 {
                 font-size: 3rem;
+            }
+            
+            section {
+                padding: 6rem 5%;
             }
         }
         
@@ -537,18 +526,34 @@
             
             .cta-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             .projects-grid {
                 grid-template-columns: 1fr;
             }
             
-            .about-image {
-                max-width: 100%;
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
             }
             
-            section {
-                padding: 5rem 5%;
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -562,53 +567,85 @@
         <div class="logo">SayedSadiq</div>
         <div class="nav-links">
             <a href="#home">Home</a>
-            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
+        </div>
+        <div class="theme-toggle">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+            </label>
+            <i class="fas fa-moon"></i>
         </div>
     </nav>
     
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Building <span class="highlight">Digital Experiences</span> That Inspire</h1>
-            <p>Hi, I'm Sayed Sadiq. A passionate Full Stack Developer & UI/UX Designer creating modern web applications with cutting-edge technologies.</p>
+            <h1>Hello, I'm <span class="highlight">Sayed Sadiq</span></h1>
+            <p>🚀 Frontend Developer | Web Development Intern at ApexPlanet</p>
+            <p>HTML, CSS, JavaScript Enthusiast · Open to Projects & Collaborations</p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                <a href="https://github.com/SayedSadiq45" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com/in/sayed-sadiq45" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+                <a href="mailto:sayedmohdsadiq.786@gmail.com" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
             </div>
-        </div>
-        <div class="hero-image floating">
-            <!-- This would be an animated SVG in a real implementation -->
         </div>
     </section>
     
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-image">
-                <!-- Profile image placeholder -->
-                <div style="background: linear-gradient(45deg, #4a44d6, #ff6584); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                    <i class="fas fa-user fa-5x"></i>
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">💼 My Skills</h2>
+        <div class="skills-section">
+            <div class="skills-container">
+                <div class="skill">
+                    <span>HTML</span>
+                    <div class="bar">
+                        <div class="fill" data-width="95%"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="about-text">
-                <h3>Full Stack Developer & UI/UX Designer</h3>
-                <p>With over 5 years of experience in web development, I specialize in creating responsive, user-friendly applications using modern technologies.</p>
-                <p>My passion lies in solving complex problems with elegant solutions and creating intuitive user experiences that delight users.</p>
-                <p>When I'm not coding, you'll find me exploring new design trends, contributing to open-source projects, or sharing knowledge through tech blogs.</p>
-                
-                <div class="skills">
-                    <div class="skill">JavaScript</div>
-                    <div class="skill">React</div>
-                    <div class="skill">Node.js</div>
-                    <div class="skill">TypeScript</div>
-                    <div class="skill">MongoDB</div>
-                    <div class="skill">Express</div>
-                    <div class="skill">CSS3</div>
-                    <div class="skill">Figma</div>
-                    <div class="skill">UI/UX Design</div>
+                <div class="skill">
+                    <span>CSS</span>
+                    <div class="bar">
+                        <div class="fill" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <span>JavaScript</span>
+                    <div class="bar">
+                        <div class="fill" data-width="85%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <span>React</span>
+                    <div class="bar">
+                        <div class="fill" data-width="75%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <span>Node.js</span>
+                    <div class="bar">
+                        <div class="fill" data-width="65%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <span>Git/GitHub</span>
+                    <div class="bar">
+                        <div class="fill" data-width="85%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <span>Bootstrap</span>
+                    <div class="bar">
+                        <div class="fill" data-width="80%"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -616,59 +653,67 @@
     
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">
-                    <!-- Project image placeholder -->
-                    <div style="background: linear-gradient(45deg, #ff6584, #6c63ff); height: 100%;"></div>
-                </div>
-                <div class="project-content">
-                    <h3>E-Commerce Platform</h3>
-                    <p>A full-featured online shopping platform with real-time inventory management and secure payment processing.</p>
-                    <div class="project-tags">
-                        <div class="tag">React</div>
-                        <div class="tag">Node.js</div>
-                        <div class="tag">MongoDB</div>
-                        <div class="tag">Stripe API</div>
+        <h2 class="section-title">🚀 Internship Projects</h2>
+        <div class="projects-section">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>ApexPlanet Task 1</h3>
+                    <div class="badges">
+                        <span class="badge html">HTML</span>
+                        <span class="badge badge-light">Completed ✅</span>
                     </div>
-                    <a href="#" class="btn btn-outline">View Project</a>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-image">
-                    <!-- Project image placeholder -->
-                    <div style="background: linear-gradient(45deg, #4a44d6, #ff6584); height: 100%;"></div>
-                </div>
-                <div class="project-content">
-                    <h3>Task Management Dashboard</h3>
-                    <p>An intuitive project management tool with drag-and-drop interface, team collaboration, and analytics.</p>
-                    <div class="project-tags">
-                        <div class="tag">Vue.js</div>
-                        <div class="tag">Firebase</div>
-                        <div class="tag">Tailwind CSS</div>
-                        <div class="tag">D3.js</div>
+                    <p>Simple webpage structure using semantic HTML elements.</p>
+                    <div class="buttons">
+                        <a href="https://github.com/SayedSadiq45/apexplanet-task1-demo" target="_blank">View Code</a>
                     </div>
-                    <a href="#" class="btn btn-outline">View Project</a>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-image">
-                    <!-- Project image placeholder -->
-                    <div style="background: linear-gradient(45deg, #6c63ff, #4a44d6); height: 100%;"></div>
-                </div>
-                <div class="project-content">
-                    <h3>Travel App UI Design</h3>
-                    <p>A mobile-first travel application design focused on seamless user experience and beautiful visuals.</p>
-                    <div class="project-tags">
-                        <div class="tag">Figma</div>
-                        <div class="tag">UI Design</div>
-                        <div class="tag">UX Research</div>
-                        <div class="tag">Prototyping</div>
+                
+                <div class="project-card">
+                    <h3>ApexPlanet Task 2</h3>
+                    <div class="badges">
+                        <span class="badge css">CSS</span>
+                        <span class="badge badge-light">Styled Layouts 💅</span>
                     </div>
-                    <a href="#" class="btn btn-outline">View Project</a>
+                    <p>Styled web components using CSS properties and box model.</p>
+                    <div class="buttons">
+                        <a href="https://github.com/SayedSadiq45/apexplanet-task2-demo" target="_blank">View Code</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>ApexPlanet Task 3</h3>
+                    <div class="badges">
+                        <span class="badge js">JavaScript</span>
+                        <span class="badge badge-light">Form Validation 🧠</span>
+                    </div>
+                    <p>Client-side JS validation and user input interactivity.</p>
+                    <div class="buttons">
+                        <a href="https://github.com/SayedSadiq45/apexplanet-task3-demo" target="_blank">View Code</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>ApexPlanet Task 4</h3>
+                    <div class="badges">
+                        <span class="badge html">HTML</span>
+                        <span class="badge badge-light">Responsive Layout</span>
+                    </div>
+                    <p>Advanced layout design with semantic structure for practice.</p>
+                    <div class="buttons">
+                        <a href="https://github.com/SayedSadiq45/apexplanet-task4-demo" target="_blank">View Code</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>ApexPlanet Task 5</h3>
+                    <div class="badges">
+                        <span class="badge js">JavaScript</span>
+                        <span class="badge badge-light">Dynamic UI 🔄</span>
+                    </div>
+                    <p>Used DOM manipulation and JS events to create dynamic behavior.</p>
+                    <div class="buttons">
+                        <a href="https://github.com/SayedSadiq45/apexplanet-task5-demo" target="_blank">View Code</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -676,77 +721,46 @@
     
     <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-container">
+        <h2 class="section-title">📬 Get In Touch</h2>
+        <div class="contact-section">
             <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/SayedSadiq45" target="_blank">github.com/SayedSadiq45</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>LinkedIn</h4>
+                        <a href="https://linkedin.com/in/sayed-sadiq45" target="_blank">linkedin.com/in/sayed-sadiq45</a>
+                    </div>
+                </div>
+                
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="contact-text">
                         <h4>Email</h4>
-                        <a href="mailto:contact@sadique.com">contact@sadique.com</a>
+                        <a href="mailto:sayedmohdsadiq.786@gmail.com">sayedmohdsadiq.786@gmail.com</a>
                     </div>
                 </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h4>Phone</h4>
-                        <a href="tel:+1234567890">+1 (234) 567-890</a>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h4>Location</h4>
-                        <p>San Francisco, CA</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter your name">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" placeholder="What is this regarding?">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" placeholder="Enter your message"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
             </div>
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
-        </div>
-        <p>&copy; 2023 Sayed Sadiq. All Rights Reserved.</p>
+        <p>© 2023 Sayed Sadiq. All rights reserved.</p>
+        <p>Designed with ❤️ and modern web technologies</p>
     </footer>
     
     <script>
@@ -786,23 +800,70 @@
             retina_detect: true
         });
         
+        // Theme toggle functionality
+        const toggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark');
+            toggle.checked = true;
+        }
+        
+        // Toggle theme
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.add('dark');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                body.classList.remove('dark');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+        
         // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate project cards on scroll
-            const projectCards = document.querySelectorAll('.project-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
+            // Animate elements on scroll
+            const animateOnScroll = (elements, className) => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add(className);
+                            // For skills, animate the progress bars
+                            if (className === 'visible' && entry.target.classList.contains('skill')) {
+                                const fill = entry.target.querySelector('.fill');
+                                const width = fill.getAttribute('data-width');
+                                setTimeout(() => {
+                                    fill.style.width = width;
+                                }, 300);
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                elements.forEach(el => {
+                    observer.observe(el);
                 });
-            }, { threshold: 0.1 });
+            };
             
-            projectCards.forEach(card => {
-                observer.observe(card);
-            });
+            // Animate skills
+            const skills = document.querySelectorAll('.skill');
+            animateOnScroll(skills, 'visible');
+            
+            // Animate project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            animateOnScroll(projectCards, 'visible');
             
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -818,12 +879,6 @@
                         });
                     }
                 });
-            });
-            
-            // Floating animation for elements
-            const floatingElements = document.querySelectorAll('.floating');
-            floatingElements.forEach(el => {
-                el.style.animationDelay = `${Math.random() * 2}s`;
             });
         });
     </script>
