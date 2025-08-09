@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sayed Sadiq | Frontend Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         :root {
@@ -23,7 +24,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
@@ -32,6 +33,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-attachment: fixed;
+            line-height: 1.6;
         }
         
         /* Particle background */
@@ -70,6 +72,7 @@
             background-clip: text;
             color: transparent;
             animation: gradientShift 5s infinite alternate;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .nav-links {
@@ -83,6 +86,7 @@
             font-weight: 500;
             position: relative;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
         
         .nav-links a::after {
@@ -104,60 +108,6 @@
             width: 100%;
         }
         
-        /* Theme Toggle */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-left: 20px;
-            cursor: pointer;
-        }
-        
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 55px;
-            height: 28px;
-        }
-        
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 28px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: var(--primary);
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(27px);
-        }
-        
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -168,16 +118,17 @@
         }
         
         .hero-content {
-            max-width: 650px;
+            max-width: 750px;
             z-index: 10;
         }
         
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.2s;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .highlight {
@@ -186,29 +137,55 @@
             background-clip: text;
             color: transparent;
             font-weight: 800;
+            display: block;
         }
         
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+        .hero-intro {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.4s;
+            max-width: 650px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.8rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            z-index: -1;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.6s;
+            flex-wrap: wrap;
         }
         
         .btn {
-            padding: 0.8rem 2rem;
+            padding: 1rem 2.2rem;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.1rem;
         }
         
         .btn-primary {
@@ -227,11 +204,6 @@
             box-shadow: 0 15px 25px rgba(108, 99, 255, 0.4);
         }
         
-        /* Floating Animation */
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
         /* Sections */
         section {
             padding: 8rem 10%;
@@ -239,9 +211,10 @@
         
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 5rem;
             position: relative;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .section-title::after {
@@ -250,89 +223,52 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 100px;
+            height: 5px;
             background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-        
-        /* Skills Section */
-        .skills-section {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-        }
-        
-        .skills-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .skill {
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-        
-        .skill.visible {
-            opacity: 1;
-            transform: translateX(0);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .skill span {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .bar {
-            width: 100%;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .fill {
-            height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 10px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            transition: width 1.5s ease-in-out;
+            border-radius: 3px;
         }
         
         /* Projects Section */
         .projects-section {
             background: rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 4rem;
+            backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
         
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 3rem;
         }
         
         .project-card {
-            background: var(--glass);
+            background: linear-gradient(145deg, rgba(40,40,70,0.5), rgba(30,30,60,0.3));
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             transition: var(--transition);
             transform: translateY(30px);
             opacity: 0;
             backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
         }
         
         .project-card.visible {
@@ -341,26 +277,36 @@
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .project-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
         }
         
         .project-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
         }
         
         .badge {
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
         
@@ -374,82 +320,94 @@
         }
         
         .project-card p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: #ccc;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
+            flex-grow: 1;
+            text-align: center;
+            line-height: 1.7;
         }
         
-        .buttons a {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background: var(--primary);
+        .live-button {
+            display: block;
+            padding: 0.9rem 0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
-        .buttons a:hover {
-            background: var(--secondary);
+        .live-button:hover {
             transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+            background: linear-gradient(to right, var(--secondary), var(--primary));
         }
         
         /* Contact Section */
         .contact-section {
             background: rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 4rem;
+            backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            margin: 0 auto;
         }
         
         .contact-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--glass);
+            gap: 1.5rem;
+            padding: 1.8rem;
+            background: linear-gradient(145deg, rgba(40,40,70,0.5), rgba(30,30,60,0.3));
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
+            border-radius: 18px;
             transition: var(--transition);
             backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .contact-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: rgba(108, 99, 255, 0.1);
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: rgba(108, 99, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary);
+            flex-shrink: 0;
         }
         
         .contact-text h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .contact-text a {
             color: var(--light);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 1.1rem;
         }
         
         .contact-text a:hover {
@@ -459,11 +417,16 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0 3rem;
             border-top: 1px solid var(--glass-border);
             margin-top: 5rem;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #aaa;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
         }
         
         /* Animations */
@@ -500,23 +463,27 @@
         }
         
         /* Responsive Design */
-        @media (max-width: 992px) {
+        @media (max-width: 1100px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 3.8rem;
             }
             
             section {
                 padding: 6rem 5%;
             }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
         }
         
         @media (max-width: 768px) {
             .navbar {
-                padding: 1rem 5%;
+                padding: 1.2rem 5%;
             }
             
             .nav-links {
-                display: none;
+                gap: 1.2rem;
             }
             
             .hero {
@@ -524,36 +491,63 @@
                 text-align: center;
             }
             
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-intro {
+                font-size: 1.1rem;
+                padding: 1.3rem;
+            }
+            
             .cta-buttons {
                 justify-content: center;
-                flex-wrap: wrap;
+                gap: 1rem;
             }
             
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .btn {
+                padding: 0.9rem 1.8rem;
+                font-size: 1rem;
             }
             
-            .hero h1 {
+            .section-title {
                 font-size: 2.5rem;
+            }
+            
+            .projects-section,
+            .contact-section {
+                padding: 2.5rem;
+            }
+            
+            .project-card {
+                padding: 1.8rem;
             }
         }
         
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
             }
             
             .btn {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
+                width: 100%;
+            }
+            
+            .project-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-item {
+                padding: 1.4rem;
             }
         }
     </style>
@@ -567,16 +561,8 @@
         <div class="logo">SayedSadiq</div>
         <div class="nav-links">
             <a href="#home">Home</a>
-            <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
-        </div>
-        <div class="theme-toggle">
-            <label class="switch">
-                <input type="checkbox" id="darkModeToggle">
-                <span class="slider"></span>
-            </label>
-            <i class="fas fa-moon"></i>
         </div>
     </nav>
     
@@ -584,8 +570,11 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Hello, I'm <span class="highlight">Sayed Sadiq</span></h1>
-            <p>🚀 Frontend Developer | Web Development Intern at ApexPlanet</p>
-            <p>HTML, CSS, JavaScript Enthusiast · Open to Projects & Collaborations</p>
+            <div class="hero-intro">
+                Motivated and dependable BSc IT student with foundational skills in web development and cloud computing. 
+                Eager to contribute to innovative digital solutions, learn collaboratively, and tackle real-world technical challenges. 
+                Seeking opportunities to apply my technical skills in a professional environment while continuing to grow as a developer.
+            </div>
             <div class="cta-buttons">
                 <a href="https://github.com/SayedSadiq45" target="_blank" class="btn btn-primary">
                     <i class="fab fa-github"></i> GitHub
@@ -600,120 +589,86 @@
         </div>
     </section>
     
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">💼 My Skills</h2>
-        <div class="skills-section">
-            <div class="skills-container">
-                <div class="skill">
-                    <span>HTML</span>
-                    <div class="bar">
-                        <div class="fill" data-width="95%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>CSS</span>
-                    <div class="bar">
-                        <div class="fill" data-width="90%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>JavaScript</span>
-                    <div class="bar">
-                        <div class="fill" data-width="85%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>React</span>
-                    <div class="bar">
-                        <div class="fill" data-width="75%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Node.js</span>
-                    <div class="bar">
-                        <div class="fill" data-width="65%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Git/GitHub</span>
-                    <div class="bar">
-                        <div class="fill" data-width="85%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Bootstrap</span>
-                    <div class="bar">
-                        <div class="fill" data-width="80%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">🚀 Internship Projects</h2>
+        <h2 class="section-title">🚀 Featured Projects</h2>
         <div class="projects-section">
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>ApexPlanet Task 1</h3>
+                    <div class="project-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Portfolio Website</h3>
                     <div class="badges">
                         <span class="badge html">HTML</span>
-                        <span class="badge badge-light">Completed ✅</span>
-                    </div>
-                    <p>Simple webpage structure using semantic HTML elements.</p>
-                    <div class="buttons">
-                        <a href="https://github.com/SayedSadiq45/apexplanet-task1-demo" target="_blank">View Code</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>ApexPlanet Task 2</h3>
-                    <div class="badges">
                         <span class="badge css">CSS</span>
-                        <span class="badge badge-light">Styled Layouts 💅</span>
-                    </div>
-                    <p>Styled web components using CSS properties and box model.</p>
-                    <div class="buttons">
-                        <a href="https://github.com/SayedSadiq45/apexplanet-task2-demo" target="_blank">View Code</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>ApexPlanet Task 3</h3>
-                    <div class="badges">
                         <span class="badge js">JavaScript</span>
-                        <span class="badge badge-light">Form Validation 🧠</span>
                     </div>
-                    <p>Client-side JS validation and user input interactivity.</p>
-                    <div class="buttons">
-                        <a href="https://github.com/SayedSadiq45/apexplanet-task3-demo" target="_blank">View Code</a>
-                    </div>
+                    <p>Designed and developed a responsive portfolio website with modern UI/UX principles. Implemented mobile-first design approach ensuring compatibility across all devices.</p>
+                    <a href="https://sayedsadiq45.github.io/portfolio/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
                 </div>
                 
                 <div class="project-card">
-                    <h3>ApexPlanet Task 4</h3>
+                    <div class="project-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>E-commerce Dashboard</h3>
                     <div class="badges">
                         <span class="badge html">HTML</span>
-                        <span class="badge badge-light">Responsive Layout</span>
+                        <span class="badge css">CSS</span>
+                        <span class="badge js">JavaScript</span>
                     </div>
-                    <p>Advanced layout design with semantic structure for practice.</p>
-                    <div class="buttons">
-                        <a href="https://github.com/SayedSadiq45/apexplanet-task4-demo" target="_blank">View Code</a>
-                    </div>
+                    <p>Created an interactive dashboard for e-commerce analytics with responsive admin panel and role-based access control. Integrated with RESTful APIs for real-time data display.</p>
+                    <a href="https://sayedsadiq45.github.io/ecommerce-dashboard/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
                 </div>
                 
                 <div class="project-card">
-                    <h3>ApexPlanet Task 5</h3>
+                    <div class="project-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Weather Application</h3>
                     <div class="badges">
                         <span class="badge js">JavaScript</span>
-                        <span class="badge badge-light">Dynamic UI 🔄</span>
+                        <span class="badge css">CSS</span>
                     </div>
-                    <p>Used DOM manipulation and JS events to create dynamic behavior.</p>
-                    <div class="buttons">
-                        <a href="https://github.com/SayedSadiq45/apexplanet-task5-demo" target="_blank">View Code</a>
+                    <p>Weather forecast application with dynamic UI that provides current weather data and 5-day forecasts. Features geolocation support and responsive design.</p>
+                    <a href="https://sayedsadiq45.github.io/weather-app/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-tasks"></i>
                     </div>
+                    <h3>Task Management System</h3>
+                    <div class="badges">
+                        <span class="badge js">JavaScript</span>
+                        <span class="badge css">CSS</span>
+                    </div>
+                    <p>Task management system with drag-and-drop functionality, priority tagging, and deadline tracking. Features local storage for data persistence.</p>
+                    <a href="https://sayedsadiq45.github.io/task-manager/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Recipe Finder</h3>
+                    <div class="badges">
+                        <span class="badge js">JavaScript</span>
+                        <span class="badge html">HTML</span>
+                    </div>
+                    <p>Interactive recipe finder that allows users to search, filter, and save recipes. Features ingredient lists, cooking instructions, and nutrition information.</p>
+                    <a href="https://sayedsadiq45.github.io/recipe-finder/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
                 </div>
             </div>
         </div>
@@ -753,6 +708,16 @@
                         <a href="mailto:sayedmohdsadiq.786@gmail.com">sayedmohdsadiq.786@gmail.com</a>
                     </div>
                 </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Location</h4>
+                        <a>Mumbra, Thane 400612, India</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -767,21 +732,21 @@
         // Initialize Particles.js
         particlesJS("particles-js", {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
+                number: { value: 90, density: { enable: true, value_area: 900 } },
                 color: { value: "#6c63ff" },
                 shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
+                opacity: { value: 0.6, random: true },
+                size: { value: 4, random: true },
                 line_linked: {
                     enable: true,
-                    distance: 150,
+                    distance: 160,
                     color: "#6c63ff",
                     opacity: 0.4,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 2,
+                    speed: 2.5,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -798,27 +763,6 @@
                 }
             },
             retina_detect: true
-        });
-        
-        // Theme toggle functionality
-        const toggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        
-        // Check for saved theme preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark');
-            toggle.checked = true;
-        }
-        
-        // Toggle theme
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.add('dark');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                body.classList.remove('dark');
-                localStorage.setItem('darkMode', 'disabled');
-            }
         });
         
         // Navbar scroll effect
@@ -839,14 +783,6 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add(className);
-                            // For skills, animate the progress bars
-                            if (className === 'visible' && entry.target.classList.contains('skill')) {
-                                const fill = entry.target.querySelector('.fill');
-                                const width = fill.getAttribute('data-width');
-                                setTimeout(() => {
-                                    fill.style.width = width;
-                                }, 300);
-                            }
                             observer.unobserve(entry.target);
                         }
                     });
@@ -856,10 +792,6 @@
                     observer.observe(el);
                 });
             };
-            
-            // Animate skills
-            const skills = document.querySelectorAll('.skill');
-            animateOnScroll(skills, 'visible');
             
             // Animate project cards
             const projectCards = document.querySelectorAll('.project-card');
