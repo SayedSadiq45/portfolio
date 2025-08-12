@@ -51,6 +51,28 @@
                         radial-gradient(circle at 80% 70%, rgba(255, 101, 132, 0.1) 0%, transparent 40%);
         }
         
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.4);
+            animation: float 15s infinite linear;
+        }
+        
+        .particle:nth-child(2n) {
+            background: rgba(255, 101, 132, 0.4);
+        }
+        
         /* Navigation */
         .navbar {
             display: flex;
@@ -179,6 +201,10 @@
             color: transparent;
             font-weight: 800;
             display: block;
+            position: relative;
+            overflow: hidden;
+            background-size: 300% 300%;
+            animation: gradientShift 3s ease infinite;
         }
         
         .hero-intro {
@@ -197,6 +223,12 @@
             overflow: hidden;
             line-height: 1.8;
             border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+        
+        .hero-intro:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
         .hero-intro::before {
@@ -313,6 +345,9 @@
             height: 6px;
             background: linear-gradient(to right, var(--primary), var(--accent));
             border-radius: 3px;
+            animation: expandLine 1s forwards 0.5s;
+            transform-origin: left;
+            transform: scaleX(0);
         }
         
         /* Projects Section */
@@ -369,6 +404,9 @@
             width: 100%;
             height: 6px;
             background: linear-gradient(to right, var(--primary), var(--accent));
+            transform-origin: left;
+            transform: scaleX(0);
+            animation: expandLine 0.6s forwards 0.8s;
         }
         
         .project-icon {
@@ -433,6 +471,8 @@
             color: var(--light);
             border: 1px solid var(--glass-border);
         }
+        .badge.api { background: #8B5CF6; color: white; }
+        .badge.local { background: #10B981; color: white; }
         
         .project-card p {
             margin-bottom: 2.5rem;
@@ -662,6 +702,27 @@
             }
         }
         
+        @keyframes expandLine {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 1200px) {
             .hero h1 {
@@ -867,6 +928,9 @@
     <!-- Background Effect -->
     <div class="background-effect"></div>
     
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">SayedSadiq</div>
@@ -910,79 +974,89 @@
         <h2 class="section-title">🚀 Featured Projects</h2>
         <div class="projects-section">
             <div class="projects-grid">
+                <!-- Task 1 -->
                 <div class="project-card">
                     <div class="project-icon">
-                        <i class="fas fa-briefcase"></i>
+                        <i class="fas fa-file-code"></i>
                     </div>
-                    <h3>Portfolio Website</h3>
+                    <h3>HTML Fundamentals</h3>
                     <div class="badges">
                         <span class="badge html">HTML</span>
                         <span class="badge css">CSS</span>
                         <span class="badge js">JavaScript</span>
                     </div>
-                    <p>Designed and developed a responsive portfolio website with modern UI/UX principles. Implemented mobile-first design approach ensuring compatibility across all devices.</p>
-                    <a href="https://sayedsadiq45.github.io/portfolio/" target="_blank" class="live-button">
+                    <p>Simple webpage with HTML structure, CSS styling, and a JavaScript alert button demonstrating foundational web development skills.</p>
+                    <a href="https://sayedsadiq45.github.io/apexplanet-task1-demo/" target="_blank" class="live-button">
                         <i class="fas fa-external-link-alt"></i> View Live Demo
                     </a>
                 </div>
                 
+                <!-- Task 2 -->
                 <div class="project-card">
                     <div class="project-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <h3>E-commerce Dashboard</h3>
+                    <h3>Contact Form & To-Do List</h3>
                     <div class="badges">
                         <span class="badge html">HTML</span>
                         <span class="badge css">CSS</span>
                         <span class="badge js">JavaScript</span>
                     </div>
-                    <p>Created an interactive dashboard for e-commerce analytics with responsive admin panel and role-based access control. Integrated with RESTful APIs for real-time data display.</p>
-                    <a href="https://sayedsadiq45.github.io/ecommerce-dashboard/" target="_blank" class="live-button">
+                    <p>Responsive contact form with input validation and a dynamic to-do list application with CRUD operations.</p>
+                    <a href="https://sayedsadiq45.github.io/apexplanet-task2-demo/" target="_blank" class="live-button">
                         <i class="fas fa-external-link-alt"></i> View Live Demo
                     </a>
                 </div>
                 
+                <!-- Task 3 -->
                 <div class="project-card">
                     <div class="project-icon">
-                        <i class="fas fa-cloud-sun"></i>
+                        <i class="fas fa-question-circle"></i>
                     </div>
-                    <h3>Weather Application</h3>
+                    <h3>Interactive Quiz App</h3>
                     <div class="badges">
-                        <span class="badge js">JavaScript</span>
-                        <span class="badge css">CSS</span>
-                    </div>
-                    <p>Weather forecast application with dynamic UI that provides current weather data and 5-day forecasts. Features geolocation support and responsive design.</p>
-                    <a href="https://sayedsadiq45.github.io/weather-app/" target="_blank" class="live-button">
-                        <i class="fas fa-external-link-alt"></i> View Live Demo
-                    </a>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3>Task Management System</h3>
-                    <div class="badges">
-                        <span class="badge js">JavaScript</span>
-                        <span class="badge css">CSS</span>
-                    </div>
-                    <p>Task management system with drag-and-drop functionality, priority tagging, and deadline tracking. Features local storage for data persistence.</p>
-                    <a href="https://sayedsadiq45.github.io/task-manager/" target="_blank" class="live-button">
-                        <i class="fas fa-external-link-alt"></i> View Live Demo
-                    </a>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Recipe Finder</h3>
-                    <div class="badges">
-                        <span class="badge js">JavaScript</span>
                         <span class="badge html">HTML</span>
+                        <span class="badge css">CSS</span>
+                        <span class="badge js">JavaScript</span>
+                        <span class="badge api">API</span>
                     </div>
-                    <p>Interactive recipe finder that allows users to search, filter, and save recipes. Features ingredient lists, cooking instructions, and nutrition information.</p>
-                    <a href="https://sayedsadiq45.github.io/recipe-finder/" target="_blank" class="live-button">
+                    <p>Quiz application fetching data from a public API, featuring responsive design and smooth animations.</p>
+                    <a href="https://sayedsadiq45.github.io/apexplanet-task3-demo/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
+                </div>
+                
+                <!-- Task 4 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Portfolio & Product Listing</h3>
+                    <div class="badges">
+                        <span class="badge html">HTML</span>
+                        <span class="badge css">CSS</span>
+                        <span class="badge js">JavaScript</span>
+                        <span class="badge local">localStorage</span>
+                    </div>
+                    <p>Personal portfolio website integrated with a product listing page featuring sorting, filtering, and to-do app.</p>
+                    <a href="https://sayedsadiq45.github.io/apexplanet-task4-demo/" target="_blank" class="live-button">
+                        <i class="fas fa-external-link-alt"></i> View Live Demo
+                    </a>
+                </div>
+                
+                <!-- Task 5 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-commerce Website</h3>
+                    <div class="badges">
+                        <span class="badge html">HTML</span>
+                        <span class="badge css">CSS</span>
+                        <span class="badge js">JavaScript</span>
+                    </div>
+                    <p>Fully functional e-commerce site with product listings, search, cart functionality, and responsive design.</p>
+                    <a href="https://sayedsadiq45.github.io/apexplanet-task5-demo/" target="_blank" class="live-button">
                         <i class="fas fa-external-link-alt"></i> View Live Demo
                     </a>
                 </div>
@@ -1040,7 +1114,7 @@
     
     <!-- Footer -->
     <footer>
-        <p>© 2023 Sayed Sadiq. All rights reserved.</p>
+        <p>© 2025 Sayed Sadiq. All rights reserved.</p>
         <p>Designed with ❤️ and modern web technologies</p>
         <div class="social-links">
             <a href="https://github.com/SayedSadiq45" target="_blank"><i class="fab fa-github"></i></a>
@@ -1050,6 +1124,34 @@
     </footer>
     
     <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 5-30px
+                const size = Math.random() * 25 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay and duration
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
         // Mobile Navigation
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
@@ -1079,6 +1181,9 @@
         
         // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
+            // Create particles
+            createParticles();
+            
             // Animate elements on scroll
             const animateOnScroll = (elements, className) => {
                 const observer = new IntersectionObserver((entries) => {
@@ -1121,6 +1226,16 @@
                         });
                     }
                 });
+            });
+            
+            // Add pulse animation to hero intro on hover
+            const heroIntro = document.querySelector('.hero-intro');
+            heroIntro.addEventListener('mouseenter', () => {
+                heroIntro.style.animation = 'pulse 1s ease';
+            });
+            
+            heroIntro.addEventListener('animationend', () => {
+                heroIntro.style.animation = '';
             });
         });
         
