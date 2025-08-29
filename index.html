@@ -669,6 +669,159 @@
             box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
         }
         
+        /* Chatbot Widget Styles */
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #chatbot-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        #chat-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: rgba(10, 10, 20, 0.95);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        #chat-header {
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #chat-header img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        #chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        #chat-status {
+            font-size: 0.8rem;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        #chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+        }
+        
+        #chat-log {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .chat-message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .user-message {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        #chat-input-container {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        #chat-input {
+            flex: 1;
+            border: none;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+        
+        #chat-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        #chat-send {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        #chat-send:hover {
+            transform: scale(1.05);
+        }
+        
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -720,6 +873,17 @@
             }
             100% {
                 transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         
@@ -821,6 +985,12 @@
             .project-card {
                 padding: 2rem;
             }
+            
+            /* Chatbot responsive */
+            #chat-widget {
+                width: 320px;
+                right: 10px;
+            }
         }
         
         @media (max-width: 600px) {
@@ -875,6 +1045,22 @@
                 font-size: 1.1rem;
                 padding: 1.5rem;
             }
+            
+            /* Chatbot responsive */
+            #chat-widget {
+                width: 300px;
+                height: 400px;
+                right: 10px;
+                bottom: 80px;
+            }
+            
+            #chatbot-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -905,6 +1091,12 @@
             
             footer {
                 padding: 3rem 1rem;
+            }
+            
+            /* Chatbot responsive */
+            #chat-widget {
+                width: 280px;
+                height: 380px;
             }
         }
         
@@ -1115,13 +1307,34 @@
     <!-- Footer -->
     <footer>
         <p>© 2025 Sayed Sadiq. All rights reserved.</p>
-        <p>Designed with ❤️ and modern web technologies</p>
+        <p>Designed with ❤️ </p>
         <div class="social-links">
             <a href="https://github.com/SayedSadiq45" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/sayed-sadiq45" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             <a href="mailto:sayedmohdsadiq.786@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
     </footer>
+    
+    <!-- Chatbot Widget -->
+    <button id="chatbot-toggle">💬</button>
+    <div id="chat-widget">
+        <div id="chat-header">
+            <i class="fas fa-robot"></i>
+            <h3>Portfolio Assistant</h3>
+            <span id="chat-status">Online</span>
+        </div>
+        <div id="chat-log">
+            <div class="chat-message bot-message">
+                Hi there! 👋 I'm here to help you learn more about Sayed and his work. What would you like to know?
+            </div>
+        </div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask me about Sayed..." />
+            <button id="chat-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
     
     <script>
         // Create floating particles
@@ -1248,6 +1461,103 @@
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             document.body.classList.add('reduced-animations');
         }
+        
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatWidget = document.getElementById('chat-widget');
+        const chatLog = document.getElementById('chat-log');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        
+        // Toggle chat widget
+        chatbotToggle.addEventListener('click', () => {
+            const isVisible = chatWidget.style.display === 'flex';
+            chatWidget.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                chatInput.focus();
+            }
+        });
+        
+        // Send message function
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            chatInput.value = '';
+            
+            // Process message and generate response
+            setTimeout(() => {
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+            }, 600);
+        }
+        
+        // Send message on button click
+        chatSend.addEventListener('click', sendMessage);
+        
+        // Send message on Enter key
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message');
+            messageElement.classList.add(sender + '-message');
+            messageElement.textContent = text;
+            
+            chatLog.appendChild(messageElement);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+        
+        // Generate response based on user input
+        function generateResponse(input) {
+            const lowerInput = input.toLowerCase();
+            
+            // Greetings
+            if (lowerInput.includes('hi') || lowerInput.includes('hello') || lowerInput.includes('hey')) {
+                return "Hello! How can I help you learn more about Sayed?";
+            }
+            
+            // About Sayed
+            if (lowerInput.includes('about') || lowerInput.includes('who is')) {
+                return "Sayed Sadiq is a motivated BSc IT student with skills in web development and cloud computing. He's passionate about creating innovative digital solutions and is eager to contribute to real-world projects.";
+            }
+            
+            // Skills
+            if (lowerInput.includes('skill') || lowerInput.includes('technology') || lowerInput.includes('tech stack')) {
+                return "Sayed works with HTML, CSS, JavaScript, and has experience with cloud computing platforms. Check out his projects to see these skills in action!";
+            }
+            
+            // Projects
+            if (lowerInput.includes('project') || lowerInput.includes('work')) {
+                return "Sayed has created several projects including an e-commerce site, quiz app, portfolio website, and more. You can view them all in the projects section above.";
+            }
+            
+            // Contact
+            if (lowerInput.includes('contact') || lowerInput.includes('email') || lowerInput.includes('linkedin') || lowerInput.includes('github')) {
+                return "You can reach Sayed via email at sayedmohdsadiq.786@gmail.com, or connect with him on LinkedIn and GitHub. All his contact details are in the contact section.";
+            }
+            
+            // Location
+            if (lowerInput.includes('where') || lowerInput.includes('location') || lowerInput.includes('based')) {
+                return "Sayed is based in Mumbra, Thane, India (400612).";
+            }
+            
+            // Default response
+            return "I'm not sure how to answer that. You can ask me about Sayed's skills, projects, or how to contact him.";
+        }
+        
+        // Add initial bot message
+        setTimeout(() => {
+            addMessage("Hi there! 👋 I'm here to help you learn more about Sayed and his work. What would you like to know?", 'bot');
+        }, 1000);
     </script>
 </body>
 </html>
